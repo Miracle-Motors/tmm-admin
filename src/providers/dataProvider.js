@@ -1,24 +1,32 @@
 import { fetchUtils } from 'react-admin';
 import { stringify } from 'query-string';
 
-const apiUrl = 'https://jsonplaceholder.typicode.com';
-const httpClient = fetchUtils.fetchJson;
+const apiUrl = 'https://miraclemotors.herokuapp.com/api/v1';
+
+const httpClient = (url, options = {}) => {
+	if (!options.headers) {
+		options.headers = new Headers({ Accept: 'application/json' });
+	}
+	const token = localStorage.getItem('token');
+	options.headers.set('Authorization', `Bearer ${token}`);
+	return fetchUtils.fetchJson(url, options);
+};
 
 export default {
 	getList: (resource, params) => {
-		const { page, perPage } = params.pagination;
-		const { field, order } = params.sort;
+		const { page, perPage: limit } = params.pagination;
 		const query = {
-			sort: JSON.stringify([field, order]),
-			range: JSON.stringify([(page - 1) * perPage, page * perPage - 1]),
-			filter: JSON.stringify(params.filter),
+			page,
+			limit,
 		};
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
-		return httpClient(url).then(({ headers, json }) => ({
-			data: json,
-			total: parseInt(headers.get('content-range').split('/').pop(), 10),
-		}));
+		return httpClient(url).then(({ json }) => {
+			return {
+				data: json.data,
+				total: json.data.length,
+			};
+		});
 	},
 
 	getOne: (resource, params) =>

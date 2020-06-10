@@ -1,6 +1,5 @@
 import React from 'react';
 import { List, Datagrid, TextField, EmailField } from 'react-admin';
-import MyUrlField from '../my-url-field';
 
 export default (props) => (
 	<List {...props}>
@@ -9,7 +8,6 @@ export default (props) => (
 			<TextField source='name' />
 			<EmailField source='email' />
 			<TextField source='phone' />
-			<MyUrlField source='website' />
 			<TextField source='company.name' />
 		</Datagrid>
 	</List>

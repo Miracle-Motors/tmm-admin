@@ -3,11 +3,16 @@
 	"version": "0.1.0",
 	"private": true,
 	"dependencies": {
+		"@material-ui/core": "^4.10.1",
+		"@material-ui/icons": "^4.9.1",
+		"axios": "^0.19.2",
 		"prop-types": "^15.7.2",
-		"ra-data-json-server": "^3.5.3",
+		"ra-core": "^3.6.0",
+		"ra-ui-materialui": "^3.6.0",
 		"react": "^16.13.1",
 		"react-admin": "^3.5.3",
 		"react-dom": "^16.13.1",
+		"react-final-form": "^6.5.0",
 		"react-scripts": "3.4.1"
 	},
 	"scripts": {
