@@ -3,17 +3,25 @@ import {
 	Create,
 	SimpleForm,
 	TextInput,
-	ReferenceInput,
-	SelectInput,
+	NumberInput,
+	useNotify,
+	useRedirect,
 } from 'react-admin';
 
-export default (props) => (
-	<Create {...props}>
-		<SimpleForm>
-			<ReferenceInput source='userId' reference='users'>
-				<SelectInput optionText='name' />
-			</ReferenceInput>
-			<TextInput multiline source='body' />
-		</SimpleForm>
-	</Create>
-);
+export default (props) => {
+	const notify = useNotify();
+	const redirect = useRedirect();
+	const onSuccess = () => {
+		notify('Terminal created successfully'); // default message is 'ra.notification.updated'
+		redirect('list', props.basePath);
+	};
+	return (
+		<Create {...props} onSuccess={onSuccess}>
+			<SimpleForm redirect='list'>
+				<TextInput label='Name' source='name' />
+				<NumberInput label='State ID' source='stateId' />
+				<NumberInput label='LGA ID' source='lgaId' />
+			</SimpleForm>
+		</Create>
+	);
+};

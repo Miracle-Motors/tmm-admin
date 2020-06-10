@@ -22,6 +22,7 @@ export default {
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
 		return httpClient(url).then(({ json }) => {
+			console.log(json);
 			return {
 				data: json.data,
 				total: json.data.length,
@@ -29,10 +30,23 @@ export default {
 		});
 	},
 
-	getOne: (resource, params) =>
-		httpClient(`${apiUrl}/${resource}/${params.id}`).then(({ json }) => ({
-			data: json,
-		})),
+	getOne: (resource, params) => {
+		if (resource === 'terminals')
+			return Promise.resolve({
+				currentPage: 1,
+				data: {},
+				message: 'OK',
+				nextPage: null,
+				prevPage: null,
+				status: true,
+				totalPages: 1,
+			});
+		return httpClient(`${apiUrl}/${resource}/${params.id}`).then(
+			({ json }) => ({
+				data: json,
+			})
+		);
+	},
 
 	getMany: (resource, params) => {
 		const query = {
