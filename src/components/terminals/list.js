@@ -14,7 +14,11 @@ export default (props) => {
 				/>
 			) : (
 				<Datagrid>
-					<TextField sortable={false} source='id' />
+					<TextField
+						label='Terminal ID'
+						sortable={false}
+						source='id'
+					/>
 					<TextField sortable={false} source='name' />
 					<TextField sortable={false} label='LGA' source='lga.name' />
 					<TextField

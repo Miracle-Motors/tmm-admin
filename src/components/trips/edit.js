@@ -4,47 +4,50 @@ import {
 	SimpleForm,
 	TextInput,
 	NumberInput,
-	useNotify,
 	DateInput,
-	useRedirect,
 } from 'react-admin';
+import EditFormWrapper from '../edit-form-wrapper';
 
 export default (props) => {
-	const notify = useNotify();
-	const redirect = useRedirect();
-	const onSuccess = () => {
-		notify('Trip updated successfully'); // default message is 'ra.notification.updated'
-		redirect('list', props.basePath);
-	};
-	const transform = (data) => {
-		console.log(data);
-		return {
-			...data,
+	const handleSubmit = (data, onSave) => {
+		const {
+			arrivalTerminal: { id: arrivalTerminalId },
+			departureTerminal: { id: departureTerminalId },
+			departureTimestamp,
+			vehicle: { id: vehicleId },
+			price,
+		} = data;
+		const editdata = {
+			arrivalTerminalId,
+			departureTerminalId,
+			departureTimestamp,
+			vehicleId,
+			price,
 		};
+		return onSave(editdata);
 	};
-	console.log(props);
+
 	return (
-		<Edit {...props} transform={transform} onSuccess={onSuccess}>
-			<SimpleForm>
-				<TextInput disabled source='id' />
-				<TextInput
-					label='Arrival Terminal ID'
-					source='arrivalTerminal.id'
-					// name='arrivalTerminalId'
-				/>
-				<TextInput
-					label='Departure Terminal ID'
-					source='departureTerminal.id'
-					// name='departureTerminalId'
-				/>
-				<DateInput label='Departure Time' source='departureTimestamp' />
-				<TextInput
-					label='Vehicle ID'
-					source='vehicle.id'
-					// name='vehicleId'
-				/>
-				<NumberInput label='Price' source='price' />
-			</SimpleForm>
+		<Edit {...props}>
+			<EditFormWrapper handleSubmit={handleSubmit}>
+				<SimpleForm>
+					<TextInput disabled source='id' />
+					<TextInput
+						label='Arrival Terminal ID'
+						source='arrivalTerminal.id'
+					/>
+					<TextInput
+						label='Departure Terminal ID'
+						source='departureTerminal.id'
+					/>
+					<DateInput
+						label='Departure Time'
+						source='departureTimestamp'
+					/>
+					<TextInput label='Vehicle ID' source='vehicle.id' />
+					<NumberInput label='Price' source='price' />
+				</SimpleForm>
+			</EditFormWrapper>
 		</Edit>
 	);
 };

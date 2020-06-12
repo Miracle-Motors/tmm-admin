@@ -24,13 +24,17 @@ export default {
 		return httpClient(url).then(({ json }) => {
 			return {
 				data: json.data,
-				total: json.data.length,
+				total: json.data.length * json.totalPages,
 			};
 		});
 	},
 
 	getOne: (resource, params) => {
-		if (resource === 'terminals' || resource === 'trips')
+		if (
+			resource === 'terminals' ||
+			resource === 'trips' ||
+			resource === 'users'
+		)
 			return Promise.resolve({
 				currentPage: 1,
 				data: {},

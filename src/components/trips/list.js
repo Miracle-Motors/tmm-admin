@@ -10,13 +10,15 @@ export default (props) => {
 		<List exporter={false} title='List of Trips' {...props}>
 			{isSmall ? (
 				<SimpleList
-					primaryText={({ lga: { name } }) => name}
-					secondaryText={({ name }) => name}
-					tertiaryText={({ state: { name } }) => name}
+					primaryText={({ arrivalTerminal: { name } }) => name}
+					secondaryText={({ departureTerminal: { name } }) => name}
+					tertiaryText={({ departureTimestamp }) =>
+						moment(departureTimestamp).format('DD/MM/YYYY')
+					}
 				/>
 			) : (
 				<Datagrid>
-					<TextField sortable={false} source='id' />
+					<TextField sortable={false} label='Trip ID' source='id' />
 					<TextField
 						sortable={false}
 						label='Arrival Terminal'

@@ -1,28 +1,34 @@
 import React from 'react';
-import {
-	Edit,
-	SimpleForm,
-	TextInput,
-	NumberInput,
-	useNotify,
-	useRedirect,
-} from 'react-admin';
+import { Edit, SimpleForm, TextInput, NumberInput } from 'react-admin';
+import EditFormWrapper from '../edit-form-wrapper';
 
 export default (props) => {
-	const notify = useNotify();
-	const redirect = useRedirect();
-	const onSuccess = () => {
-		notify('Terminal updated successfully'); // default message is 'ra.notification.updated'
-		redirect('list', props.basePath);
+	const handleSubmit = (data, onSave) => {
+		const {
+			state: { id: state },
+			lga: { id: lga },
+			name,
+		} = data;
+		const editdata = {
+			lga,
+			state,
+			name,
+		};
+		return onSave(editdata);
 	};
 	return (
-		<Edit {...props} onSuccess={onSuccess}>
-			<SimpleForm>
-				<TextInput disabled source='id' />
-				<TextInput source='name' />
-				<NumberInput source='state' format={(record) => record.id} />
-				<NumberInput source='lga' format={(record) => record.id} />
-			</SimpleForm>
+		<Edit {...props}>
+			<EditFormWrapper handleSubmit={handleSubmit}>
+				<SimpleForm>
+					<TextInput disabled source='id' />
+					<TextInput source='name' />
+					<NumberInput
+						source='state'
+						format={(record) => record.id}
+					/>
+					<NumberInput source='lga' format={(record) => record.id} />
+				</SimpleForm>
+			</EditFormWrapper>
 		</Edit>
 	);
 };
