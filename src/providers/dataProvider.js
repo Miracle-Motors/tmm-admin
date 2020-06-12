@@ -22,7 +22,6 @@ export default {
 		const url = `${apiUrl}/${resource}?${stringify(query)}`;
 
 		return httpClient(url).then(({ json }) => {
-			console.log(json);
 			return {
 				data: json.data,
 				total: json.data.length,
@@ -31,7 +30,7 @@ export default {
 	},
 
 	getOne: (resource, params) => {
-		if (resource === 'terminals')
+		if (resource === 'terminals' || resource === 'trips')
 			return Promise.resolve({
 				currentPage: 1,
 				data: {},
