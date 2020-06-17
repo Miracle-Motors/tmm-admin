@@ -6,7 +6,7 @@ import {
 	CreateTerminal,
 	EditTerminal,
 } from './components/terminals';
-import { TripsList, CreateTrip, EditTrip } from './components/trips';
+import { TripsList, CreateTrip } from './components/trips';
 import Login from './components/login';
 import { UsersList, EditUser } from './components/users';
 import DirectionsBus from '@material-ui/icons/DirectionsBus';
@@ -31,7 +31,6 @@ const App = () => (
 		<Resource
 			name='trips'
 			list={TripsList}
-			edit={EditTrip}
 			create={CreateTrip}
 			icon={CardTravel}
 		/>

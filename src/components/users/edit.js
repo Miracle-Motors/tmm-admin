@@ -21,11 +21,6 @@ export default (props) => {
 						source='email'
 						name='email'
 					/>
-					<TextInput
-						label='Phone Number'
-						source='phoneNumber'
-						name='phone'
-					/>
 					<SelectInput
 						source='gender'
 						choices={[

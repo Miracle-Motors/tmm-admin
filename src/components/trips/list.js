@@ -50,7 +50,6 @@ export default (props) => {
 						format={(price) => `${price} NGN`}
 					/>
 					<TextField sortable={false} source='status' />
-					<EditButton />
 				</Datagrid>
 			)}
 		</List>
