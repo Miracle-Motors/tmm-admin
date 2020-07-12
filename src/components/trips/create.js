@@ -21,8 +21,6 @@ export default (props) => {
 		redirect('list', props.basePath);
 	};
 
-	console.log('vehicles', vehicles);
-
 	const dataProvider = useDataProvider();
 
 	useEffect(() => {
