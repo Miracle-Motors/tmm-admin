@@ -1,5 +1,5 @@
 import React from 'react';
-import { List, Datagrid, TextField, EditButton, SimpleList } from 'react-admin';
+import { List, Datagrid, TextField, SimpleList } from 'react-admin';
 import { useMediaQuery } from '@material-ui/core';
 import CustomTextField from '../custom-text-field';
 import moment from 'moment';
@@ -7,7 +7,11 @@ import moment from 'moment';
 export default (props) => {
 	const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 	return (
-		<List exporter={false} title='List of Trips' {...props}>
+		<List
+			exporter={false}
+			bulkActionButtons={false}
+			title='List of Trips'
+			{...props}>
 			{isSmall ? (
 				<SimpleList
 					primaryText={({ arrivalTerminal: { name } }) => name}

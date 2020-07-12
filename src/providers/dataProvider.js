@@ -108,6 +108,7 @@ export default {
 		}).then(({ json }) => ({ data: json })),
 
 	deleteMany: (resource, params) => {
+		console.log('params', params);
 		const query = {
 			filter: JSON.stringify({ id: params.ids }),
 		};

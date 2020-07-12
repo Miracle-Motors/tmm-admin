@@ -1,11 +1,22 @@
 import React from 'react';
-import { List, Datagrid, TextField, EditButton, SimpleList } from 'react-admin';
+import {
+	List,
+	Datagrid,
+	TextField,
+	EditButton,
+	DeleteButton,
+	SimpleList,
+} from 'react-admin';
 import { useMediaQuery } from '@material-ui/core';
 
 export default (props) => {
 	const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 	return (
-		<List exporter={false} title='List of Terminals' {...props}>
+		<List
+			exporter={false}
+			title='List of Terminals'
+			bulkActionButtons={false}
+			{...props}>
 			{isSmall ? (
 				<SimpleList
 					primaryText={({ lga: { name } }) => name}
@@ -27,6 +38,7 @@ export default (props) => {
 						source='state.name'
 					/>
 					<EditButton />
+					<DeleteButton />
 				</Datagrid>
 			)}
 		</List>

@@ -12,7 +12,11 @@ import { useMediaQuery } from '@material-ui/core';
 export default (props) => {
 	const isSmall = useMediaQuery((theme) => theme.breakpoints.down('sm'));
 	return (
-		<List exporter={false} title='List of Users' {...props}>
+		<List
+			exporter={false}
+			bulkActionButtons={false}
+			title='List of Users'
+			{...props}>
 			{isSmall ? (
 				<SimpleList
 					primaryText={(firstName) => firstName}
