@@ -51,12 +51,19 @@ export default (props) => {
 				/>
 				<DateInput label='Departure Time' source='departureTimestamp' />
 				<SelectInput
-					label='Vehicles'
+					label='Vehicle'
 					source='vehicleId'
 					choices={vehicles.map(
 						({ plateNumber, id, type: { model } }) => ({
 							id,
-							name: `${model} - ${plateNumber}`,
+							name: `${model
+								.split(' ')
+								.map(
+									(item) =>
+										item.charAt(0).toUpperCase() +
+										item.substr(1)
+								)
+								.join(' ')} - ${plateNumber}`,
 						})
 					)}
 				/>
