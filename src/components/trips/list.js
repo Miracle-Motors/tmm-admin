@@ -25,13 +25,13 @@ export default (props) => {
 					<TextField sortable={false} label='Trip ID' source='id' />
 					<TextField
 						sortable={false}
-						label='Arrival Terminal'
-						source='arrivalTerminal.name'
+						label='Departure Terminal'
+						source='departureTerminal.name'
 					/>
 					<TextField
 						sortable={false}
-						label='Departure Terminal'
-						source='departureTerminal.name'
+						label='Arrival Terminal'
+						source='arrivalTerminal.name'
 					/>
 					<CustomTextField
 						sortable={false}
@@ -44,8 +44,9 @@ export default (props) => {
 						label='Available Seats'
 						source='seats'
 						format={(seats) =>
-							seats.filter((seat) => seat.status === 'available')
-								.length
+							seats?.filter(
+								(seat) => seat?.status === 'available'
+							)?.length
 						}
 					/>
 					<CustomTextField

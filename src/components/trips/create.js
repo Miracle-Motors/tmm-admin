@@ -10,6 +10,9 @@ import {
 	useDataProvider,
 	SelectInput,
 } from 'react-admin';
+import FormWrapper from '../form-wrapper';
+import moment from 'moment';
+import { omit } from 'lodash';
 
 export default (props) => {
 	const notify = useNotify();
@@ -22,6 +25,16 @@ export default (props) => {
 	};
 
 	const dataProvider = useDataProvider();
+
+	const handleSubmit = (data, onSave) => {
+		const creationData = {
+			...omit(data, ['departureTimestamp']),
+			departureTimestamp: moment(data.departureTimestamp).format(
+				'YYYY-MM-DD HH:mm:ss'
+			),
+		};
+		return onSave(creationData);
+	};
 
 	useEffect(() => {
 		dataProvider
@@ -38,35 +51,40 @@ export default (props) => {
 
 	return (
 		<Create {...props} onSuccess={onSuccess}>
-			<SimpleForm redirect='list'>
-				<TextInput
-					label='Arrival Terminal ID'
-					source='arrivalTerminalId'
-				/>
-				<TextInput
-					label='Departure Terminal ID'
-					source='departureTerminalId'
-				/>
-				<DateInput label='Departure Time' source='departureTimestamp' />
-				<SelectInput
-					label='Vehicle'
-					source='vehicleId'
-					choices={vehicles.map(
-						({ plateNumber, id, type: { model } }) => ({
-							id,
-							name: `${model
-								.split(' ')
-								.map(
-									(item) =>
-										item.charAt(0).toUpperCase() +
-										item.substr(1)
-								)
-								.join(' ')} - ${plateNumber}`,
-						})
-					)}
-				/>
-				<NumberInput label='Price' source='price' />
-			</SimpleForm>
+			<FormWrapper handleSubmit={handleSubmit}>
+				<SimpleForm redirect='list'>
+					<TextInput
+						label='Departure Terminal ID'
+						source='departureTerminalId'
+					/>
+					<TextInput
+						label='Arrival Terminal ID'
+						source='arrivalTerminalId'
+					/>
+					<DateInput
+						label='Departure Time'
+						source='departureTimestamp'
+					/>
+					<SelectInput
+						label='Vehicle'
+						source='vehicleId'
+						choices={vehicles.map(
+							({ plateNumber, id, type: { model } }) => ({
+								id,
+								name: `${model
+									.split(' ')
+									.map(
+										(item) =>
+											item.charAt(0).toUpperCase() +
+											item.substr(1)
+									)
+									.join(' ')} - ${plateNumber}`,
+							})
+						)}
+					/>
+					<NumberInput label='Price' source='price' />
+				</SimpleForm>
+			</FormWrapper>
 		</Create>
 	);
 };

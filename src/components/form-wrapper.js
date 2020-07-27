@@ -1,6 +1,6 @@
 import { cloneElement } from 'react';
 
-const EditFormWrapper = (props) => {
+const FormWrapper = (props) => {
 	const { save, children, ...rest } = props;
 	return children
 		? cloneElement(props.children, {
@@ -12,4 +12,4 @@ const EditFormWrapper = (props) => {
 		: null;
 };
 
-export default EditFormWrapper;
+export default FormWrapper;

@@ -6,12 +6,12 @@ import {
 	SelectInput,
 	BooleanInput,
 } from 'react-admin';
-import EditFormWrapper from '../edit-form-wrapper';
+import FormWrapper from '../form-wrapper';
 
 export default (props) => {
 	return (
 		<Edit {...props}>
-			<EditFormWrapper>
+			<FormWrapper>
 				<SimpleForm>
 					<TextInput disabled source='id' />
 					<TextInput label='First Name' source='firstName' />
@@ -39,7 +39,7 @@ export default (props) => {
 					/>
 					<BooleanInput label='Verified' source='verified' />
 				</SimpleForm>
-			</EditFormWrapper>
+			</FormWrapper>
 		</Edit>
 	);
 };

@@ -7,7 +7,7 @@ import {
 	SelectInput,
 	useEditController,
 } from 'react-admin';
-import EditFormWrapper from '../edit-form-wrapper';
+import FormWrapper from '../form-wrapper';
 import { getLgasOptionsByState, getStatesOptions } from '../../libs';
 
 export default (props) => {
@@ -52,7 +52,7 @@ export default (props) => {
 
 	return (
 		<Edit {...props}>
-			<EditFormWrapper handleSubmit={handleSubmit}>
+			<FormWrapper handleSubmit={handleSubmit}>
 				<SimpleForm>
 					<TextInput disabled source='id' />
 					<TextInput source='name' />
@@ -70,7 +70,7 @@ export default (props) => {
 						choices={getLgasOptionsByState(stateId, locations)}
 					/>
 				</SimpleForm>
-			</EditFormWrapper>
+			</FormWrapper>
 		</Edit>
 	);
 };
