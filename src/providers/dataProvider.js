@@ -33,6 +33,7 @@ export default {
 		if (
 			resource === 'terminals' ||
 			resource === 'trips' ||
+			resource === 'bookings' ||
 			resource === 'users'
 		)
 			return Promise.resolve({
