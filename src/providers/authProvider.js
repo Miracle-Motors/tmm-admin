@@ -3,7 +3,7 @@ const apiUrl = 'https://miraclemotors.herokuapp.com/api/v1';
 
 export default {
 	// called when the user attempts to log in
-	login: ({ phoneNumber, password }) => {
+	login: ({ phoneNumber, password, isAdmin: true }) => {
 		return axios
 			.post(`${apiUrl}/auth/signin`, { phoneNumber, password })
 			.then(({ data: { data } }) => {
