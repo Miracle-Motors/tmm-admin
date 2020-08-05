@@ -35,7 +35,7 @@ export default (props) => {
 					<TextField sortable={false} label='Type' source='type' />
 					<TextField
 						sortable={false}
-						label='Number Of Travellers'
+						label='Number Of travellers'
 						source='numberOfTravellers'
 					/>
 					<TextField
