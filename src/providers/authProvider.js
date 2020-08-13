@@ -3,9 +3,9 @@ const apiUrl = 'https://miraclemotors.herokuapp.com/api/v1';
 
 export default {
 	// called when the user attempts to log in
-	login: ({ phoneNumber, password, isAdmin: true }) => {
+	login: ({ phoneNumber, password }) => {
 		return axios
-			.post(`${apiUrl}/auth/signin`, { phoneNumber, password })
+			.post(`${apiUrl}/auth/signin`, { phoneNumber, password, isAdmin: true })
 			.then(({ data: { data } }) => {
 				localStorage.setItem('user', JSON.stringify(data.user));
 				localStorage.setItem('refreshToken', data.refreshToken);
